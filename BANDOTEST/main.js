@@ -31,14 +31,14 @@ closer.onclick = function() {
 
 var view = new ol.View({
     projection: 'EPSG:4326',
-    center: [78.0, 23.0],
-    zoom: 5,
+    center: [104.26, 11.04089],
+    zoom: 15,
 
 });
 var view_ov = new ol.View({
     projection: 'EPSG:4326',
-    center: [78.0, 23.0],
-    zoom: 5,
+    center: [104.26, 11.04089],
+    zoom: 15,
 });
 
 
@@ -64,24 +64,23 @@ var overlays = new ol.layer.Group({
     'title': 'Overlays',
     layers: [
         new ol.layer.Image({
-            title: 'india_district',
-            // extent: [-180, -90, -180, 90],
+            title: 'Quy hoạch sử dụng đất',
             source: new ol.source.ImageWMS({
-                url: 'http://localhost:8082/geoserver/wms',
+                url: 'http://localhost:8080/geoserver/nhombaton/wms',
                 params: {
-                    'LAYERS': 'india:india_district'
+                    'LAYERS': 'nhombaton:vinhtan_qhsdd'
                 },
                 ratio: 1,
                 serverType: 'geoserver'
             })
         }),
         new ol.layer.Image({
-            title: 'india_state',
+            title: 'Hiện trang sử dụng đất',
             // extent: [-180, -90, -180, 90],
             source: new ol.source.ImageWMS({
-                url: 'http://localhost:8082/geoserver/wms',
+                url: 'http://localhost:8080/geoserver/nhombaton/wms',
                 params: {
-                    'LAYERS': 'india:india_state'
+                    'LAYERS': 'nhombaton:vinhtan_htsdd'
                 },
                 ratio: 1,
                 serverType: 'geoserver'
@@ -102,12 +101,11 @@ map.addLayer(base_maps);
 map.addLayer(overlays);
 
 var rainfall = new ol.layer.Image({
-    title: 'india_state',
-    // extent: [-180, -90, -180, 90],
+    title: 'Nền địa chính',
     source: new ol.source.ImageWMS({
-        url: 'http://localhost:8082/geoserver/wms',
+        url: 'http://localhost:8080/geoserver/nhombaton/wms',
         params: {
-            'LAYERS': 'india:india_state'
+            'LAYERS': 'nhombaton:vinhtan_ndc'
         },
         ratio: 1,
         serverType: 'geoserver'
@@ -178,7 +176,7 @@ function legend() {
     var ar = [];
     var i;
     for (i = 0; i < no_layers; i++) {
-        ar.push("http://localhost:8082/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=" + overlays.getLayers().item(i).get('title'));
+        ar.push("http://localhost:8080/geoserver/nhombaton/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=" + overlays.getLayers().item(i).get('title'));
         //alert(overlays.getLayers().item(i).get('title'));
     }
     for (i = 0; i < no_layers; i++) {
@@ -232,7 +230,7 @@ function getinfo(evt) {
             layer_title[i] = overlays.getLayers().item(i).get('title');
             //alert(layer_title[i]);
             wmsSource[i] = new ol.source.ImageWMS({
-                url: 'http://localhost:8082/geoserver/wms',
+                url: 'http://localhost:8080/geoserver/nhombaton/wms',
                 params: {
                     'LAYERS': layer_title[i]
                 },
@@ -653,7 +651,7 @@ function wms_layers() {
     $(document).ready(function() {
         $.ajax({
             type: "GET",
-            url: "http://localhost:8082/geoserver/wms?request=getCapabilities",
+            url: "http://localhost:8080/geoserver/nhombaton/wms?request=getCapabilities",
             dataType: "xml",
             success: function(xml) {
                 $('#table_wms_layers').empty();
@@ -760,7 +758,7 @@ function add_layer() {
         title: name[1],
         // extent: [-180, -90, -180, 90],
         source: new ol.source.ImageWMS({
-            url: 'http://localhost:8082/geoserver/wms',
+            url: 'http://localhost:8080/geoserver/nhombaton/wms',
             params: {
                 'LAYERS': layer_name
             },
@@ -770,7 +768,7 @@ function add_layer() {
     });
     overlays.getLayers().push(layer_wms);
 
-    var url = 'http://localhost:8082/geoserver/wms?request=getCapabilities';
+    var url = 'http://localhost:8080/geoserver/nhombaton/wms?request=getCapabilities';
     var parser = new ol.format.WMSCapabilities();
 
 
