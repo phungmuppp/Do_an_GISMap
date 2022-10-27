@@ -1,12 +1,8 @@
 var map, geojson, layer_name, layerSwitcher, featureOverlay;
 var container, content, closer;
-
-
 var container = document.getElementById('popup');
 var content = document.getElementById('popup-content');
 var closer = document.getElementById('popup-closer');
-
-
 /**
  * Create an overlay to anchor the popup to the map.
  */
@@ -63,8 +59,9 @@ var OSM = new ol.layer.Tile({
 var overlays = new ol.layer.Group({
     'title': 'Overlays',
     layers: [
+
         new ol.layer.Image({
-            title: 'Quy hoạch sử dụng đất',
+            title: 'quy hoach su dung dat',
             source: new ol.source.ImageWMS({
                 url: 'http://localhost:8080/geoserver/nhombaton/wms',
                 params: {
@@ -74,9 +71,9 @@ var overlays = new ol.layer.Group({
                 serverType: 'geoserver'
             })
         }),
+
         new ol.layer.Image({
-            title: 'Hiện trang sử dụng đất',
-            // extent: [-180, -90, -180, 90],
+            title: 'Hien trang su dung dat',
             source: new ol.source.ImageWMS({
                 url: 'http://localhost:8080/geoserver/nhombaton/wms',
                 params: {
@@ -85,7 +82,19 @@ var overlays = new ol.layer.Group({
                 ratio: 1,
                 serverType: 'geoserver'
             })
-        })
+        }),
+        new ol.layer.Image({
+            title: 'nen dia chinh',
+            source: new ol.source.ImageWMS({
+                url: 'http://localhost:8080/geoserver/nhombaton/wms',
+                params: {
+                    'LAYERS': 'nhombaton:vinhtan_ndc'
+                },
+                ratio: 1,
+                serverType: 'geoserver'
+            })
+        }),
+
 
     ]
 });
@@ -94,26 +103,12 @@ var overlays = new ol.layer.Group({
 var map = new ol.Map({
     target: 'map',
     view: view,
+
     overlays: [overlay]
 });
 
 map.addLayer(base_maps);
 map.addLayer(overlays);
-
-var rainfall = new ol.layer.Image({
-    title: 'Nền địa chính',
-    source: new ol.source.ImageWMS({
-        url: 'http://localhost:8080/geoserver/nhombaton/wms',
-        params: {
-            'LAYERS': 'nhombaton:vinhtan_ndc'
-        },
-        ratio: 1,
-        serverType: 'geoserver'
-    })
-});
-
-overlays.getLayers().push(rainfall);
-//map.addLayer(rainfall);
 
 var mouse_position = new ol.control.MousePosition();
 map.addControl(mouse_position);
@@ -168,17 +163,23 @@ function legend() {
 
     var head = document.createElement("h4");
 
-    var txt = document.createTextNode("Legend");
+    var txt = document.createTextNode("Chu thich");
 
     head.appendChild(txt);
     var element = document.getElementById("legend");
     element.appendChild(head);
     var ar = [];
     var i;
-    for (i = 0; i < no_layers; i++) {
-        ar.push("http://localhost:8080/geoserver/nhombaton/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=" + overlays.getLayers().item(i).get('title'));
-        //alert(overlays.getLayers().item(i).get('title'));
-    }
+    ar.push(
+        "http://localhost:8080/geoserver/nhombaton/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&LAYER=nhombaton:vinhan_qhsdd"
+    );
+    ar.push(
+        "http://localhost:8080/geoserver/nhombaton/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&LAYER=nhombaton:vinhan_htsdd"
+    );
+    ar.push(
+        "http://localhost:8080/geoserver/nhombaton/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&LAYER=nhombaton:vinhan_ndc"
+    );
+
     for (i = 0; i < no_layers; i++) {
         var head = document.createElement("p");
 
@@ -204,7 +205,6 @@ legend();
 
 
 function getinfo(evt) {
-
 
     var coordinate = evt.coordinate;
     var viewResolution = /** @type {number} */ (view.getResolution());
