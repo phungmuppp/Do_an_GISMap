@@ -21,6 +21,7 @@ body {
     top: 15%;
     left: 15%;
     width: 85%;
+    height: 96%;
     overflow: scroll;
     border: 0.5px solid #4CAF50;
 }
