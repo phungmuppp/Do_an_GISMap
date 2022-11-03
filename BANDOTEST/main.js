@@ -206,11 +206,9 @@ var full_sc = new ol.control.FullScreen({
 });
 map.addControl(full_sc);
 
-
 // reload de tro ve man hinh index chinh
-var homeButton = document.createElement("button");
-homeButton.innerHTML =
-  '<img src="../img/home-icon.jpg" alt="home-icon" style="width: 20px;height: 20px;filter: brightness(0) invert(1); vertical-align: middle;">';
+var homeButton = document.createElement('button');
+homeButton.innerHTML = '<img src="../img/home-icon.jpg" alt="home-icon" style="width: 25px;height: 25px;margin-left: -6px; margin-top: -6px;">';
 homeButton.className = "myButton";
 var homeElement = document.createElement("div");
 homeElement.className = "homButtonDiv";
