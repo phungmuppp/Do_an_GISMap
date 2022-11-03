@@ -3,17 +3,19 @@
 
 <head>
     <link rel="stylesheet" href="../libs/openlayers/ol.css" />
-    <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="../libs/layerswitcher/ol-layerswitcher.js" />
-    <link rel="stylesheet" href="../libs/jquery/jquery-ui.css" />
+    <link rel="stylesheet" href="../libs/openlayers/layout.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.1.0/ol.css" />
+    <link rel="stylesheet" href="../libs/layerswitcher/ol-layerswitcher.css" />
     <link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css" />
-    <title>QUAN LY NHA DAT</title>
+    <link rel="stylesheet" href="../libs/jquery/jquery-ui.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>OpenLayers example</title>
 </head>
 
 <body>
     <div id="title">
         <marquee behavior="scroll" direction="left">
-            <h5><b>QUAN LY NHA DAT</b></h5>
+            <h5><b>Web based GIS Application</b></h5>
         </marquee>
     </div>
     <div id="map">
@@ -52,6 +54,7 @@
             <li class="active">
                 <a data-toggle="tab" href="#form">Select by Attributes</a>
             </li>
+            <li><a data-toggle="tab" href="#form1">Select by Draw</a></li>
         </ul>
 
         <div class="tab-content">
@@ -77,19 +80,37 @@
                 <br />
                 <button class="btn btn-success" onclick="query()">Load Query</button>
             </div>
+            <div id="form1" class="tab-pane fade">
+                <label for="layer1">Select Layer</label>
+                <select class="form-control" id="layer1" name="layer1">
+            <option value="">Select Layer</option>
+          </select>
+                <br />
+                <label for="attributes">Select attribute</label>
+
+                <label for="draw_type">Geometry type &nbsp;</label>
+                <select class="form-control" id="draw_type" name="draw_type">
+            <option value="select">Select Shape</option>
+            <option value="Square">Square</option>
+            <option value="Box">Box</option>
+            <option value="Polygon">Polygon</option>
+            <option value="Star">Star</option>
+            <option value="clear">Clear</option>
+          </select>
+                <br />
+            </div>
         </div>
     </div>
     <div id="table_data"></div>
     <div id="wms_layers_window" title="Available WMS Layers" style="display: none"></div>
     <table id="table_wms_layers" class="table-bordered"></table>
-
     <script src="../libs/openlayers/ol.js"></script>
-    <script src="./main.js"></script>
+    <script type="text/javascript" src="../libs/layerswitcher/ol-layerswitcher.js"></script>
+    <script type="text/javascript" src="../libs/bootstrap/bootstrap.min.js"></script>
     <script src="../libs/jquery/jquery.js"></script>
     <script src="../libs/jquery/jquery-ui.js"></script>
-    <script type="text/javascript" src="../libs/bootstrap/bootstrap.min.js"></script>
-    <script type="text/javascript" src="http://localhost:8082/webgis/libs/bootstrap.min.js"></script>
-    <script src="../libs/layerswitcher/ol-layerswitcher.js"></script>
+    <script src="../libs/jquery/jquery.min.js"></script>
+    <script src="./main.js"></script>
 </body>
 
 </html>

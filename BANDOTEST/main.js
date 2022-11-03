@@ -42,7 +42,7 @@ var base_maps = new ol.layer.Group({
     'title': 'Base maps',
     layers: [
         new ol.layer.Tile({
-            title: 'OSM',
+            title: 'Bản đồ thế giới',
             type: 'base',
             visible: true,
             source: new ol.source.OSM()
@@ -59,9 +59,8 @@ var OSM = new ol.layer.Tile({
 var overlays = new ol.layer.Group({
     'title': 'Overlays',
     layers: [
-
         new ol.layer.Image({
-            title: 'quy hoach su dung dat',
+            title: 'Quy hoạch sử dụng đất',
             source: new ol.source.ImageWMS({
                 url: 'http://localhost:8080/geoserver/nhombaton/wms',
                 params: {
@@ -71,9 +70,8 @@ var overlays = new ol.layer.Group({
                 serverType: 'geoserver'
             })
         }),
-
         new ol.layer.Image({
-            title: 'Hien trang su dung dat',
+            title: 'Hiện trạng sử dụng đất',
             source: new ol.source.ImageWMS({
                 url: 'http://localhost:8080/geoserver/nhombaton/wms',
                 params: {
@@ -84,7 +82,7 @@ var overlays = new ol.layer.Group({
             })
         }),
         new ol.layer.Image({
-            title: 'nen dia chinh',
+            title: 'Nền địa chính',
             source: new ol.source.ImageWMS({
                 url: 'http://localhost:8080/geoserver/nhombaton/wms',
                 params: {
@@ -94,8 +92,6 @@ var overlays = new ol.layer.Group({
                 serverType: 'geoserver'
             })
         }),
-
-
     ]
 });
 
@@ -103,7 +99,6 @@ var overlays = new ol.layer.Group({
 var map = new ol.Map({
     target: 'map',
     view: view,
-
     overlays: [overlay]
 });
 
@@ -136,8 +131,6 @@ map.addControl(zoom);
 var slider = new ol.control.ZoomSlider();
 map.addControl(slider);
 
-
-
 var zoom_ex = new ol.control.ZoomToExtent({
     extent: [
         65.90, 7.48,
@@ -163,7 +156,7 @@ function legend() {
 
     var head = document.createElement("h4");
 
-    var txt = document.createTextNode("Chu thich");
+    var txt = document.createTextNode("Chú thích");
 
     head.appendChild(txt);
     var element = document.getElementById("legend");
@@ -182,22 +175,16 @@ function legend() {
 
     for (i = 0; i < no_layers; i++) {
         var head = document.createElement("p");
-
         var txt = document.createTextNode(overlays.getLayers().item(i).get('title'));
-        //alert(txt[i]);
         head.appendChild(txt);
         var element = document.getElementById("legend");
         element.appendChild(head);
         var img = new Image();
         img.src = ar[i];
-
         var src = document.getElementById("legend");
         src.appendChild(img);
-
     }
-
 }
-
 legend();
 
 
