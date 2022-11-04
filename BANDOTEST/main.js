@@ -18,7 +18,7 @@ var view = new ol.View({
 var view_ov = new ol.View({
   projection: "EPSG:4326",
   center: [104.26, 11.04089],
-  zoom: 17,
+  zoom: 20,
 });
 
 // tao mot map
@@ -106,7 +106,7 @@ map.addLayer(overlays);
 var mouse_position = new ol.control.MousePosition({
   projection: "EPSG:4326",
   coordinateFormat: function (coordinate) {
-    return ol.coordinate.format(coordinate, "{y},{x}", 6);
+    return ol.coordinate.format(coordinate, "{x},{y}", 6);
   },
   // coordinateFormat: createStringXY(4),
 });
@@ -210,7 +210,7 @@ map.addControl(full_sc);
 
 // reload de tro ve man hinh index chinh
 var homeButton = document.createElement('button');
-homeButton.innerHTML = '<img src="../img/home-icon.jpg" alt="home-icon" style="width: 25px;height: 25px;margin-left: -6px; margin-top: -6px;">';
+homeButton.innerHTML = '<img src="../img/home-icon.jpg" alt="home-icon" style="width: 25;height: 25px;margin-left: -6px; margin-top: -6px;  border-color:  rgba(112, 172, 250, 0.575);">';
 homeButton.className = "myButton";
 var homeElement = document.createElement("div");
 homeElement.className = "homButtonDiv";
