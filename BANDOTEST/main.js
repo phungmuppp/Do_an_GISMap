@@ -1,6 +1,8 @@
 var map, geojson, layer_name, layerSwitcher, featureOverlay;
 var container, content, closer;
 
+
+
 // Tao viewmap
 $(document).ready(function () {
   $("p").click(function () {
@@ -253,3 +255,5 @@ map.on("singleclick", function (evt) {
   }
   alert("haah");
 });
+
+
